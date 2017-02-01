@@ -1,9 +1,30 @@
 <table>
+    <tr>
+        <td>
+          <select onchange={{action (mut filter.attribute) value="target.value"}}>
+            <option>Choose</option>
+            {{#each attributes as |attribute|}}
+                <option value={{attribute.name}}  selected={{eq filter.attribute attribute}}>{{attribute.name}}</option>
+            {{/each}}
+          </select>
+        </td>
+        <td>
+          <select  onchange={{action (mut filter.operator) value="target.value"}}>
+            <option>Choose</option>
+            {{#each operators as |operator|}}
+                <option value={{operator}} selected={{eq filter.operator operator}}>{{operator}}</option>
+            {{/each}}
+          </select>
+        </td>
+        <td>{{input value=filter.value}}</td>
+        <td><button {{action 'pushFilter' filter}}>+</button></td>
+    </tr>  
   {{#each filters as |filter|}}
     <tr>
-        <td>{{filter.path}}</td>
+        <td>{{filter.attribute}}</td>
         <td>{{filter.operator}}</td>
-        <td>{{input value=filter.value}}</td>
+        <td>{{filter.value}}</td>
+        <td><button {{action 'removeFilter' filter}}>-</button></td>
     </tr>  
   {{/each}}
 </table>
