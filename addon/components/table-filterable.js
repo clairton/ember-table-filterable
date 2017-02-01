@@ -5,16 +5,18 @@ export default Ember.Component.extend({
   layout,
   store: Ember.inject.service(),
   type: null,
+  page: 1,
+  per_page: 10,
+  direction: 'ASC',
 
   onInit: Ember.on('init', function(){
     this.send('createFilter');
   }),
 
   operators: ['=*'],
+  directions: ['ASC', 'DESC'],
 
-  filters: Ember.A([
-    {attribute: 'nome', operator: '=*', value: 'Clairton'}
-  ]),
+  filters: Ember.A([]),
 
   attributes: Ember.computed('type', function(){
     let attributes = [];
@@ -25,10 +27,14 @@ export default Ember.Component.extend({
     return attributes;
   }),
 
-  params: Ember.computed('filters.[]', function(){
+  params: Ember.computed('filters.[]', 'page', 'per_page', 'direction', function(){
     let params = {};
     this.get('filters').forEach((filter) => {
       params[filter.attribute] = `${filter.operator}${filter.value}`;
+    });
+    let self = this;
+    ['page', 'per_page', 'direction'].forEach((p) => {
+      params[p] = self.get(p);
     });
     return params;
   }),

@@ -2,7 +2,7 @@
     <tr>
         <td>
           <select onchange={{action (mut filter.attribute) value="target.value"}}>
-            <option>Choose</option>
+              <option>Choose</option>
             {{#each attributes as |attribute|}}
                 <option value={{attribute.name}}  selected={{eq filter.attribute attribute}}>{{attribute.name}}</option>
             {{/each}}
@@ -18,7 +18,20 @@
         </td>
         <td>{{input value=filter.value}}</td>
         <td><button {{action 'pushFilter' filter}}>+</button></td>
-    </tr>  
+    </tr>
+    <tr>
+      <td>{{input value=page}}</td>
+      <td>{{input value=per_page}}</td>
+      <td>
+          <select  onchange={{action (mut direction) value="target.value"}}>
+            <option>Choose</option>
+            {{#each directions as |d|}}
+                <option value={{d}} selected={{eq d direction}}>{{d}}</option>
+            {{/each}}
+          </select>
+      </td>
+      <td/>
+    </tr>
   {{#each filters as |filter|}}
     <tr>
         <td>{{filter.attribute}}</td>
