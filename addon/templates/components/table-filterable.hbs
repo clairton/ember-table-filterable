@@ -1,0 +1,19 @@
+<table>
+  {{#each filters as |filter|}}
+    <tr>
+        <td>{{filter.path}}</td>
+        <td>{{filter.operator}}</td>
+        <td>{{input value=filter.value}}</td>
+    </tr>  
+  {{/each}}
+</table>
+
+<table>
+  {{#each records as |record|}}
+    <tr>
+        {{#each attributes as |attribute|}}
+          <td>{{get record attribute.name}}</td>
+        {{/each}}
+    </tr>  
+  {{/each}}
+</table>

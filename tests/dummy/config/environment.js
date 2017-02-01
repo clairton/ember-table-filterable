@@ -4,6 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'dummy',
     environment: environment,
+    host: 'http://agenda.clairton.eti.br',
+    namespace: '',
     rootURL: '/',
     locationType: 'auto',
     EmberENV: {
