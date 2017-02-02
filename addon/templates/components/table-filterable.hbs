@@ -42,7 +42,7 @@
   {{#each filters as |filter|}}
     <tr>
         <td>{{filter.attribute}}</td>
-        <td>{{filter.operator}}</td>
+        <td>{{get operators filter.operator}}</td>
         <td>{{filter.value}}</td>
         <td><button {{action 'removeFilter' filter}}>-</button></td>
     </tr>  
