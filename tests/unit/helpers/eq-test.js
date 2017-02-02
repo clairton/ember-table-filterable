@@ -1,5 +1,4 @@
-
-import eq from 'dummy/helpers/eq';
+import { eq } from 'dummy/helpers/eq';
 import { module, test } from 'qunit';
 
 module('Unit | Helper | eq');

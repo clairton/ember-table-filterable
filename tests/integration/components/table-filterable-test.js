@@ -6,20 +6,7 @@ moduleForComponent('table-filterable', 'Integration | Component | table filterab
 });
 
 test('it renders', function(assert) {
+  this.render(hbs`{{table-filterable type='pessoa'}}`);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
-  this.render(hbs`{{table-filterable}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#table-filterable}}
-      template block text
-    {{/table-filterable}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(this.$().text().trim());
 });
