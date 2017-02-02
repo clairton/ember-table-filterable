@@ -8,24 +8,16 @@ export default Ember.Component.extend({
   page: 1,
   per_page: 10,
   direction: 'ASC',
+  operators: ['=*'],
+  directions: ['ASC', 'DESC'],
+  filters: Ember.A([]),
+  attributes: [],
 
   onInit: Ember.on('init', function(){
     this.send('createFilter');
+    this.send('createAttributes');
   }),
 
-  operators: ['=*'],
-  directions: ['ASC', 'DESC'],
-
-  filters: Ember.A([]),
-
-  attributes: Ember.computed('type', function(){
-    let attributes = [];
-    if(!Ember.isNone(this.get('type'))){
-      let model = this.get('store').modelFor(this.get('type'));
-      attributes = Ember.get(model, 'attributes');
-    }
-    return attributes;
-  }),
 
   params: Ember.computed('filters.[]', 'page', 'per_page', 'direction', function(){
     let params = {};
@@ -49,6 +41,16 @@ export default Ember.Component.extend({
           attribute: null, operator: null, value: null
       });
       this.set('filter', filter);
+    },
+
+    createAttributes(){
+      if(this.get('store') && Ember.isEmpty(this.get('attributes'))){
+        if(!Ember.isNone(this.get('type'))){
+            let model = this.get('store').modelFor(this.get('type'));
+            let attributes = Ember.get(model, 'attributes');
+            this.set('attributes', attributes);
+        }
+      }
     },
 
     pushFilter(filter){
