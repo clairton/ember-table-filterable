@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   direction: 'ASC',
   operators: ['=*'],
   directions: ['ASC', 'DESC'],
+  sort: 'id',
   filters: Ember.A([]),
   attributes: [],
 
@@ -19,14 +20,17 @@ export default Ember.Component.extend({
   }),
 
 
-  params: Ember.computed('filters.[]', 'page', 'per_page', 'direction', function(){
+  params: Ember.computed('filters.[]', 'page', 'per_page', 'direction', 'sort', function(){
     let params = {};
     this.get('filters').forEach((filter) => {
       params[filter.attribute] = `${filter.operator}${filter.value}`;
     });
     let self = this;
-    ['page', 'per_page', 'direction'].forEach((p) => {
-      params[p] = self.get(p);
+    ['page', 'per_page', 'direction', 'sort'].forEach((p) => {
+      let value = self.get(p);
+      if(!Ember.isEmpty(value)){
+        params[p] = value;
+      }
     });
     return params;
   }),

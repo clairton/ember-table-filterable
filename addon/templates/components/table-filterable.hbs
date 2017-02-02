@@ -2,15 +2,15 @@
     <tr>
         <td>
           <select onchange={{action (mut filter.attribute) value="target.value"}}>
-              <option>Choose</option>
+              <option value=''>Choose</option>
             {{#each attributes as |attribute|}}
-                <option value={{attribute.name}}  selected={{eq filter.attribute attribute}}>{{attribute.name}}</option>
+                <option value={{attribute.name}}  selected={{eq filter.attribute attribute.name}}>{{attribute.name}}</option>
             {{/each}}
           </select>
         </td>
         <td>
           <select  onchange={{action (mut filter.operator) value="target.value"}}>
-            <option>Choose</option>
+            <option value=''>Choose</option>
             {{#each operators as |operator|}}
                 <option value={{operator}} selected={{eq filter.operator operator}}>{{operator}}</option>
             {{/each}}
@@ -24,13 +24,20 @@
       <td>{{input value=per_page}}</td>
       <td>
           <select  onchange={{action (mut direction) value="target.value"}}>
-            <option>Choose</option>
+            <option value=''>Choose</option>
             {{#each directions as |d|}}
                 <option value={{d}} selected={{eq d direction}}>{{d}}</option>
             {{/each}}
           </select>
       </td>
-      <td/>
+      <td>
+          <select  onchange={{action (mut sort) value="target.value"}}>
+            <option value=''>Choose</option>
+            {{#each attributes as |attribute|}}
+                <option value={{attribute.name}}  selected={{eq sort attribute.name}}>{{attribute.name}}</option>
+            {{/each}}
+          </select>
+      </td>
     </tr>
   {{#each filters as |filter|}}
     <tr>
