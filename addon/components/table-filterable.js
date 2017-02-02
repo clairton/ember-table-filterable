@@ -30,6 +30,8 @@ export default Ember.Component.extend({
   sort: 'id',
   filters: Ember.A([]),
   attributes: [],
+  meta: {total: 0},
+  total: Ember.computed.alias('meta.total'),
 
   onInit: Ember.on('init', function(){
     this.send('createFilter');
@@ -52,8 +54,16 @@ export default Ember.Component.extend({
     return params;
   }),
 
+  setMeta: Ember.observer('records.[]', function(){
+    let self = this;
+    this.get('records').then((records) => {
+      self.set('meta', records.get('meta'));
+    });
+  }),
+
   records: Ember.computed('type', 'params.[]', function(){
-    return this.get('store').query(this.get('type'), this.get('params'));
+    let self = this;
+    return self.get('store').query(self.get('type'), self.get('params'));
   }),
 
   actions: {

@@ -20,7 +20,7 @@
         <td><button {{action 'pushFilter' filter}}>+</button></td>
     </tr>
     <tr>
-      <td>{{input value=page}}</td>
+      <td>{{input value=page}} of {{total}}</td>
       <td>{{input value=per_page}}</td>
       <td>
           <select  onchange={{action (mut direction) value="target.value"}}>
@@ -39,14 +39,14 @@
           </select>
       </td>
     </tr>
-  {{#each filters as |filter|}}
-    <tr>
-        <td>{{filter.attribute}}</td>
-        <td>{{get operators filter.operator}}</td>
-        <td>{{filter.value}}</td>
-        <td><button {{action 'removeFilter' filter}}>-</button></td>
-    </tr>  
-  {{/each}}
+    {{#each filters as |filter|}}
+      <tr>
+          <td>{{filter.attribute}}</td>
+          <td>{{get operators filter.operator}}</td>
+          <td>{{filter.value}}</td>
+          <td><button {{action 'removeFilter' filter}}>-</button></td>
+      </tr>  
+    {{/each}}
 </table>
 
 <table>
