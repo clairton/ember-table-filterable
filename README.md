@@ -1,4 +1,4 @@
-# ember-table-filterable
+# ember-table-filterable [![Build Status](https://travis-ci.org/clairton/ember-table-filterable.svg?branch=master)](https://travis-ci.org/clairton/ember-table-filterable)
 
 This README outlines the details of collaborating on this Ember addon.
 
