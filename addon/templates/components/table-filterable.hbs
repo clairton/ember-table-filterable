@@ -11,9 +11,9 @@
         <td>
           <select  onchange={{action (mut filter.operator) value="target.value"}}>
             <option value=''>Choose</option>
-            {{#each operators as |operator|}}
-                <option value={{operator}} selected={{eq filter.operator operator}}>{{operator}}</option>
-            {{/each}}
+            {{#each-in operators as |key value|}}
+                <option value={{key}} selected={{eq filter.operator key}}>{{value}}</option>
+            {{/each-in}}
           </select>
         </td>
         <td>{{input value=filter.value}}</td>
