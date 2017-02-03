@@ -38,6 +38,16 @@ export default Ember.Component.extend({
     this.send('createAttributes');
   }),
 
+  last_page: Ember.computed('total', 'per_page', function(){
+    let total = this.get('total');
+    let perPage = this.get('per_page');
+    let mod = total % perPage;
+    let last = (total - mod) / perPage;
+    if(mod > 0){
+      last++;
+    }
+    return last;
+  }),
 
   params: Ember.computed('filters.[]', 'page', 'per_page', 'direction', 'sort', function(){
     let params = {};
@@ -62,8 +72,7 @@ export default Ember.Component.extend({
   }),
 
   records: Ember.computed('type', 'params.[]', function(){
-    let self = this;
-    return self.get('store').query(self.get('type'), self.get('params'));
+    return this.get('store').query(this.get('type'), this.get('params'));
   }),
 
   actions: {
