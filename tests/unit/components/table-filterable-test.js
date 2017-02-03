@@ -24,3 +24,8 @@ test('build params', function(assert) {
     sort: 'id'
   });
 });
+
+test('calc last_page', function(assert) {
+  let component = this.subject({total:11, per_page: 5});
+  assert.equal(component.get('last_page'), 3);
+});
