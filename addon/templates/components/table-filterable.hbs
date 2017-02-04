@@ -55,6 +55,12 @@
         {{#each attributes as |attribute|}}
           <td>{{get record attribute}}</td>
         {{/each}}
+        <td>
+           Operações
+          {{#each record.links as |link|}}
+              {{link.rel}}
+          {{/each}}
+        </td>
     </tr>  
   {{/each}}
 </table>
