@@ -75,6 +75,13 @@ export default Ember.Component.extend({
     return this.get('store').query(this.get('type'), this.get('params'));
   }),
 
+  didReceiveAttrs() {
+    if (!this.attrs.type) {
+      throw new Error(`You must provide an \`type\` model to \`table-filterable\`.`);
+    }
+    this._super(...arguments);
+  },
+
   actions: {
     createFilter(){
       let filter = Ember.Object.create({
@@ -84,7 +91,6 @@ export default Ember.Component.extend({
     },
 
     createAttributes(){
-      alert();
       if(this.get('store') && Ember.isEmpty(this.get('attributes'))){
         if(!Ember.isNone(this.get('type'))){
             let model = this.get('store').modelFor(this.get('type'));
