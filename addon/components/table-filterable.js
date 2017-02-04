@@ -76,7 +76,7 @@ export default Ember.Component.extend({
   }),
 
   didReceiveAttrs() {
-    if (!this.attrs.type) {
+    if (this.attrs && !this.attrs.type) {
       throw new Error(`You must provide an \`type\` model to \`table-filterable\`.`);
     }
     this._super(...arguments);

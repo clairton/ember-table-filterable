@@ -2,12 +2,13 @@ import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('table-filterable', 'Unit | Component | table filterable', {
   // Specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar'],
+  needs: ['model:pessoa'],
   unit: true
 });
 
 test('build params', function(assert) {
   let component = this.subject({
+    type: 'pessoa',
     filters: [
       {attribute: 'nome', operator: '==', value:'Clairton'}
     ],
