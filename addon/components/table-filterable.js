@@ -84,10 +84,14 @@ export default Ember.Component.extend({
     },
 
     createAttributes(){
+      alert();
       if(this.get('store') && Ember.isEmpty(this.get('attributes'))){
         if(!Ember.isNone(this.get('type'))){
             let model = this.get('store').modelFor(this.get('type'));
-            let attributes = Ember.get(model, 'attributes');
+            let attributes = [];
+            Ember.get(model, 'attributes').forEach((attribute) => {
+              attributes.push(attribute.name);
+            });
             this.set('attributes', attributes);
         }
       }
